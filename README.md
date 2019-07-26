@@ -46,11 +46,11 @@ Directory structure
 
 The .KTR files (Pentaho transformations) use a relative file path to find the text imports, so leave them in the root directory.
 
-/sql - SQL to create and modify tables.
+sql/ - SQL to create and modify tables.
 
-/txt-import - place unzipped files from the FEC here.
+txt-import/ - place unzipped files from the FEC here.
 
-/txt-import/lookup - contains CSV files to enhance FEC data
+txt-import/lookup/ - contains CSV files to enhance FEC data
 
 
 Pentaho Data Integration
@@ -71,13 +71,13 @@ You'll need the Java Virtual Machine to run Pentaho. There is a version included
 MySQL (or other database)
 -------------------------
 
-I created the Pentaho transformations using MySQL 8.0 on MacOS. A couple of them use the MySQL bulk loader. Any of these transformations can be configured to use different databases.
+I created the Pentaho transformations using MySQL 8.0 on MacOS. Any of these transformations can be configured to use different databases.
 
 MySQL installation instructions are beyond the scope of this document. Once you have MySQL (or your database of choice) up and running, do the following...
 
 - Create a database schema named: campaign_finance
 - Create the user: fec_data
-- Set fec_data's password to 'watchThem$L1ke@Hawk' (or the MySQL shared connection in pentaho-kettle-ETL-job.kjb).
+- Set fec_data's password to 'watchThem$L1ke@Hawk' (or edit the MySQL shared connection in pentaho-kettle-ETL-job.kjb to use any password you want).
 - Give user fec_data appropriate permissions in the schema.
 	- SELECT
 	- INSERT
@@ -92,8 +92,6 @@ MySQL installation instructions are beyond the scope of this document. Once you 
 	- REFERENCES
 	- INDEX
 - Use the file /sql/ddl-create.sql to create your tables files to create tables
-
-I had permissions problems using LOAD DATA INFILE on MySQL 8.0 at the command line. The Pentaho MySQL bulk loader seems to use LOAD DATA INFILE and worked like a charm.
 
 
 FEC files
@@ -114,7 +112,9 @@ From the FEC
 
 After unzipping, there are 10 FEC files, each of which maps to a database table.
 
-* File [Table]
+To run the transformations, place unzipped files in the txt-import/ directory.
+
+File [Table]
 * ccl.txt [candidate_committee]
 * cm.txt [committee_master]
 * weblYY.txt [fed_current_campaign_summary]
@@ -145,6 +145,8 @@ To Do
 
 Descriptions of zip file downloads from Federal Elections Commission
 ====================================================================
+
+Descriptions here are directly from the FEC. The US federal government can't copyright anything, so I reproduced them here.
 
 web-allYY.zip
 -------------

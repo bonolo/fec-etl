@@ -1,14 +1,11 @@
 # ignore zip downloads and txt import files
-/txt-import
 /zip-archives
+# /txt-imports/*.txt
 
 #igmore mysql models
 /mysql-models
 
 # ignore log files
-# fec-pentaho-kettle-etl.log
+*.log
 # fec-pentaho-kettle-etl.txt
 
-# ignore some sql
-# /sql/utilities.sql
-#
