@@ -71,7 +71,7 @@ You'll need the Java Virtual Machine to run Pentaho. There is a version included
 MySQL (or other database)
 -------------------------
 
-I created the Pentaho transformations using MySQL 8.0 on MacOS. Any of these transformations can be configured to use different databases.
+I created the Pentaho transformations using MySQL 8.0 on MacOS. Any of these transformations can be configured to use different databases. A couple use MySQL bulk loader, but even that would be easy enough to switch out.
 
 MySQL installation instructions are beyond the scope of this document. Once you have MySQL (or your database of choice) up and running, do the following...
 
@@ -92,6 +92,9 @@ MySQL installation instructions are beyond the scope of this document. Once you 
 	- REFERENCES
 	- INDEX
 - Use the file /sql/ddl-create.sql to create your tables files to create tables
+- If you're brave, you can create indexes and foreign keys before importing data. If you prefer less hassle, you can try to create them afterwards. Use these files when you're ready:
+	- sql/foreign-keys.sql
+	- sql/indexes.sql
 
 
 FEC files
@@ -125,6 +128,14 @@ File [Table]
 * oppexp.txt [operating_expenditure]
 * weballYY.txt [candidate_all	]
 * webkYY.txt [pac_party_summary]
+
+Some of these files will overwrite older data... primarily the summaries. Others will not. Details are in sql/indexes.sql. I may modify the tables and imports to keep all data, but for my purposes, it wasn't necessary.
+
+REPLACE (overwrite) records with duplicate keys...
+* candidate_master
+* candidate_all
+* committee_master
+* pac_party_summary
 
 
 Project Files
